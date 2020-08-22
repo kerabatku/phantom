@@ -23,9 +23,9 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
                 country_code = zone['countryCode']
 
                 if zone['dst'] == 1:
-                    daylight_saving = "Yes"
+                    daylight_saving = "Iya"
                 else:
-                    daylight_saving = "No"
+                    daylight_saving = "Tidak"
 
                 date_fmt = r"%d-%m-%Y"
                 time_fmt = r"%H:%M:%S"
@@ -39,13 +39,13 @@ def generate_time(to_find: str, findtype: List[str]) -> str:
                 break
 
     try:
-        result = (f"<b>🌍Country :</b> <code>{country_name}</code>\n"
-                  f"<b>⏳Zone Name :</b> <code>{country_zone}</code>\n"
-                  f"<b>🗺Country Code :</b> <code>{country_code}</code>\n"
-                  f"<b>🌞Daylight saving :</b> <code>{daylight_saving}</code>\n"
-                  f"<b>🌅Day :</b> <code>{current_day}</code>\n"
-                  f"<b>⌚Current Time :</b> <code>{current_time}</code>\n"
-                  f"<b>📆Current Date :</b> <code>{current_date}</code>")
+        result = (f"<b>🌍Negara :</b> <code>{country_name}</code>\n"
+                  f"<b>⏳Zona :</b> <code>{country_zone}</code>\n"
+                  f"<b>�Kode :</b> <code>{country_code}</code>\n"
+                  f"<b>�Mode penghemat :</b> <code>{daylight_saving}</code>\n"
+                  f"<b>🌅Hari :</b> <code>{current_day}</code>\n"
+                  f"<b>⌚Waktu :</b> <code>{current_time}</code>\n"
+                  f"<b>📆Tanggal :</b> <code>{current_date}</code>")
     except:
         result = None
 
@@ -77,15 +77,15 @@ def gettime(bot: Bot, update: Update):
 
 
 __help__ = """
- - /time <query> : Gives information about a timezone.
+ - /time <lokasi> : Memberi informasi lokasi yang diinginkan.
 
-Available queries : Country Code/Country Name/Timezone Name
+Lokasi : Kode Negara/Nama Negara/Zona Waktu/Nama Kota
 """
 
 TIME_HANDLER = DisableAbleCommandHandler("time", gettime)
 
 dispatcher.add_handler(TIME_HANDLER)
 
-__mod_name__ = "TIME"
+__mod_name__ = "Waktu"
 __command_list__ = ["time"]
 __handlers__ = [TIME_HANDLER]
