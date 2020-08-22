@@ -22,18 +22,18 @@ def music(bot: Bot, update: Update, args):
 	if video_id.find('youtu.be') != -1:
 		index = video_id.rfind('/') + 1
 		video_id = video_id[index:][:11]
-		message.reply_text("Please wait...\ndownloading audio.")
+		message.reply_text("Sabar boss...\nlagi ngunduh.")
 
 	elif video_id.find('youtube') != -1:
 		index = video_id.rfind('?v=') + 3
 		video_id = video_id[index:][:11]
-		message.reply_text("Please wait...\downloading audio.")
+		message.reply_text("Sabar yah...\proses mengunduh.")
 
 	elif not video_id.find('youtube') != -1:
-		message.reply_text("Please provide me youtube link")
+		message.reply_text("Tolong sertakan link youtubenya")
 
 	elif not video_id.find('youtu.be') != -1:
-		message.reply_text("Please provide me youtube link")
+		message.reply_text("Sertakan link youtube")
 		
 
         
@@ -58,7 +58,7 @@ def music(bot: Bot, update: Update, args):
 		if not json2_response['error']:
 			payload = json2_response['payload']
 
-			info = '*{0}* \nUploaded by @AnonymousD3061'.format(payload['fulltitle'])
+			info = '*{0}* \nUploaded by @canzu'.format(payload['fulltitle'])
 
 			try:
 				
@@ -66,14 +66,14 @@ def music(bot: Bot, update: Update, args):
 				count += 1
 				print("\033[1m\033[96m" + "Download count: " + str(count) + "\033[0m")
 			except:
-				bot.send_message(chat_id=chatId, text='Something went wrong with the download..!\nPlease Report there @AnonymousD3061')
+				bot.send_message(chat_id=chatId, text='Maaf, ada sesuatu yang salah..!\nSilahkan tanyakan ke @canzu')
 
 
 __help__ = """ Youtube audio Downloader
- - /music <Youtube link> : download audio file from youtube link.
+ - /music <youtube link> : download audio yutup melalui link.
 
 """
-__mod_name__ = "MP3 DOWNLOADER" 
+__mod_name__ = "Yt Audio" 
 
 music_handler = CommandHandler('music', music, pass_args=True)
 dispatcher.add_handler(music_handler)
