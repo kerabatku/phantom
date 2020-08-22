@@ -72,9 +72,9 @@ def ping(bot: Bot, update: Update):
     telegram_ping = ping_func(["Telegram"])[0].split(": ", 1)[1]
     uptime = get_readable_time((time.time() - StartTime))
 
-    reply_msg = ("PONG!!\n"
-                 "<b>Time Taken:</b> <code>{}</code>\n"
-                 "<b>Service uptime:</b> <code>{}</code>".format(telegram_ping, uptime))
+    reply_msg = ("Hai 😎!!\n"
+                 "<b>Kecepatan:</b> <code>{}</code>\n"
+                 "<b>Layanan :</b> <code>{}</code>".format(telegram_ping, uptime))
 
     update.effective_message.reply_text(reply_msg, parse_mode=ParseMode.HTML)
 
@@ -94,8 +94,8 @@ def pingall(bot: Bot, update: Update):
 
 
 __help__ = """
- - /ping - get ping time of bot to telegram server
- - /pingall - get all listed ping time
+ - /ping - menampilkan waktu ping bot ke server
+ - /pingall - menampilkan semua kecepatan server
 """
 
 PING_HANDLER = DisableAbleCommandHandler("ping", ping)
@@ -104,6 +104,6 @@ PINGALL_HANDLER = DisableAbleCommandHandler("pingall", pingall)
 dispatcher.add_handler(PING_HANDLER)
 dispatcher.add_handler(PINGALL_HANDLER)
 
-__mod_name__ = "PING"
+__mod_name__ = "Ping"
 __command_list__ = ["ping", "pingall"]
 __handlers__ = [PING_HANDLER, PINGALL_HANDLER]
