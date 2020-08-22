@@ -85,7 +85,7 @@ def abuse(bot: Bot, update: Update):
 def shrug(bot: Bot, update: Update):
     msg = update.effective_message
     reply_text = msg.reply_to_message.reply_text if msg.reply_to_message else msg.reply_text
-    reply_text(r"¯\_(ツ)_/¯")
+    reply_text(r"¯\_(ツ)_/¯ \nMana saya tau sayakan tidak tau.")
 
 
 @run_async
@@ -151,7 +151,7 @@ dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
 
-__mod_name__ = "FUN"
+__mod_name__ = "Fun"
 __command_list__ = ["runs", "slap", "roll", "toss", "shrug", "bluetext", "rlg", "decide", "table"]
 __handlers__ = [RUNS_HANDLER, SLAP_HANDLER, ROLL_HANDLER, TOSS_HANDLER, SHRUG_HANDLER, BLUETEXT_HANDLER, RLG_HANDLER,
                 DECIDE_HANDLER, TABLE_HANDLER]
