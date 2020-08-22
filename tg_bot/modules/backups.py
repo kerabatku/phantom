@@ -21,8 +21,8 @@ def import_data(bot: Bot, update: Update):
         try:
             file_info = bot.get_file(msg.reply_to_message.document.file_id)
         except BadRequest:
-            msg.reply_text("Try downloading and reuploading the file as yourself before importing - this one seems "
-                           "to be iffy!")
+            msg.reply_text("Coba download dan reupload file yang sebelumnya anda import- sabar yah "
+                           "bentar kok!")
             return
 
         with BytesIO() as file:
@@ -47,7 +47,7 @@ def import_data(bot: Bot, update: Update):
                 mod.__import_data__(str(chat.id), data)
         except Exception:
             msg.reply_text("An exception occured while restoring your data. The process may not be complete. If "
-                           "you're having issues with this, message @OnePunchSupport with your backup file so the "
+                           "you're having issues with this, message @canzusupport with your backup file so the "
                            "issue can be debugged. My owners would be happy to help, and every bug "
                            "reported makes me better! Thanks! :)")
             LOGGER.exception("Import for chatid %s with name %s failed.", str(chat.id), str(chat.title))
@@ -66,7 +66,7 @@ def export_data(bot: Bot, update: Update):
 
 
 __help__ = """
-*Admin only:*
+*Khusus Admin:*
  - /import: reply to a group butler backup file to import as much as possible, making the transfer super simple! Note \
 that files/photos can't be imported due to telegram restrictions.
  - /export: !!! This isn't a command yet, but should be coming soon!
@@ -78,5 +78,5 @@ EXPORT_HANDLER = CommandHandler("export", export_data)
 dispatcher.add_handler(IMPORT_HANDLER)
 dispatcher.add_handler(EXPORT_HANDLER)
 
-__mod_name__ = "BACKUP"
+__mod_name__ = "Backup"
 __handlers__ = [IMPORT_HANDLER, EXPORT_HANDLER]
