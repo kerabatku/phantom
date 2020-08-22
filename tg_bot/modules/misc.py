@@ -74,11 +74,11 @@ def get_id(bot: Bot, update: Update, args: List[str]):
     else:
 
         if chat.type == "private":
-            msg.reply_text(f"Your id is <code>{chat.id}</code>.",
+            msg.reply_text(f"Id anda adalah<code>{chat.id}</code>.",
                            parse_mode=ParseMode.HTML)
 
         else:
-            msg.reply_text(f"This group's id is <code>{chat.id}</code>.",
+            msg.reply_text(f"Id grup ini adalah <code>{chat.id}</code>.",
                            parse_mode=ParseMode.HTML)
 
 
@@ -113,20 +113,20 @@ def info(bot: Bot, update: Update, args: List[str]):
     else:
         return
 
-    text = (f"<b>user information:</b>\n"
+    text = (f"<b>Tentang Pengguna:</b>\n"
             f"🆔️ID: <code>{user.id}</code>\n"
-            f"👤First Name: {html.escape(user.first_name)}")
+            f"👤Nama depan: {html.escape(user.first_name)}")
 
     if user.last_name:
-        text += f"\n👤Last Name: {html.escape(user.last_name)}"
+        text += f"\n👤Nama belakang: {html.escape(user.last_name)}"
 
     if user.username:
-        text += f"\n👤Username: @{html.escape(user.username)}"
+        text += f"\n👤Nama pengguna: @{html.escape(user.username)}"
 
-    text += f"\n👤Permanent user link: {mention_html(user.id, 'link')}"
+    text += f"\n👤Link profil: {mention_html(user.id, 'link')}"
 
     num_chats = sql.get_user_num_chats(user.id)
-    text += f"\n🌍Chat count: <code>{num_chats}</code>"
+    text += f"\n🌍Grup terhitung: <code>{num_chats}</code>"
 
     try:
         user_member = chat.get_member(user.id)
@@ -142,22 +142,22 @@ def info(bot: Bot, update: Update, args: List[str]):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n😎The Disaster level of this person is 'LEGEND'."
+        text += "\n😎Orang ini adalah 'BOSS SAYA'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n🔥This member is one of 'Hero Association'."
+        text += "\n🤘🏼Orang ini adalah 'BOSS SAYA'."
         disaster_level_present = True
     elif user.id in SUDO_USERS:
-        text += "\n🔥The Disaster level of this person is 'Dragon'."
+        text += "\n🔥Level orang ini sebagai  'Tangan Kanan'."
         disaster_level_present = True
     elif user.id in SUPPORT_USERS:
-        text += "\n🔥The Disaster level of this person is 'HACKER'."
+        text += "\n🔥Level orang ini setara 'Hacker'."
         disaster_level_present = True
     elif user.id in TIGER_USERS:
-        text += "\n🔥The Disaster level of this person is 'Tiger'."
+        text += "\n🔥Level orang ini setara 'Sahabat'."
         disaster_level_present = True
     elif user.id in WHITELIST_USERS:
-        text += "\n🔥The Disaster level of this person is 'Wolf'."
+        text += "\n🔥Level orang ini setara 'Teman'."
         disaster_level_present = True
 
     if disaster_level_present:
@@ -468,6 +468,6 @@ dispatcher.add_handler(GETFW_HANDLER)
 dispatcher.add_handler(CHECKFW_HANDLER)
 
 
-__mod_name__ = "MASTER MOD"
+__mod_name__ = "Master Mod"
 __command_list__ = ["id", "info", "echo"]
 __handlers__ = [ID_HANDLER, GIFID_HANDLER, INFO_HANDLER, ECHO_HANDLER, MD_HELP_HANDLER, STATS_HANDLER, SAFEMODE_HANDLER, MAGISK_HANDLER, TWRP_HANDLER, GETFW_HANDLER, CHECKFW_HANDLER]
