@@ -34,37 +34,37 @@ PM_START_TEXT = """
 ┈┈┈┈╲┊┊┊┊╱┈┈┈┈
 ┈┈┈┈▕╲▂▂╱▏┈┈┈┈
 ╱▔▔▔▔┊┊┊┊▔▔▔▔╲
-HOI    {}, MY NAME IS {} !
+Wassap {}, saya adalah {} !
 
-I AM A GROUP MANAGER BOT MAINTAINED BY 
+Saya adalah bot admin, hasil kegabutan
 
-[THIS LEGEND](tg://user?id={}).
+[Orang ini](tg://user?id={}).
 
-HIT HELP FOR COMMANDS  /help
+Silahkan klik /help untuk melihat daftar modul
 
-I AM COMPLETELY OPEN SOURCE
+Kalo anda suka bermain game atau ingin sekedar menambah teman, gabung saja di grup @KerabatOnline.
 
-MY SOURCE CODE IS AVAILABLE TO YOU
+Basic modul Saya berasal dari
 
-[HERE](https://github.com/leobrownlee/phantom)
+[Sini](https://github.com/leobrownlee/phantom)
 
 """
 
 HELP_STRINGS = """
 
-Hello! my name *{}*.
+Hai! saya *{}*.
 
-*Main* commands available:
- - /start: start the bot
- - /help: PM's you this message.
- - /help <module name>: PM's you info about that module.
+*Daftar* perintah yang tersedia:
+ - /start: memulai bot.
+ - /help: menampilkan daftar modul.
+ - /help <modul>: menjelaskan modul tersebut.
  - /settings:
-   - in PM: will send you your settings for all supported modules.
-   - in a group: will redirect you to pm, with all that chat's settings.
+   - di PM: mengirim pengaturan untuk semua modul pendukung.
+   - di grup: mengirim PM, dengan semua pengaturan chat tersebut.
 
 
 {}
-And the following:
+Perintah yang tersedia:
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 
@@ -161,7 +161,7 @@ def start(bot: Bot, update: Update, args: List[str]):
 
 
     else:
-        update.effective_message.reply_text("Yo, whadup?🤧")
+        update.effective_message.reply_text("Hai para kerabat?🤧")
 
 
 def send_start(bot, update):
@@ -212,7 +212,7 @@ def help_button(bot: Bot, update: Update):
     try:
         if mod_match:
             module = mod_match.group(1)
-            text = "Here is the help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) \
+            text = "Ini bantuan untuk *{}* modul:\n".format(HELPABLE[module].__mod_name__) \
                    + HELPABLE[module].__help__
             query.message.reply_text(text=text,
                                      parse_mode=ParseMode.MARKDOWN,
