@@ -27,22 +27,22 @@ def allow_connections(bot: Bot, update: Update, args: List[str]):
             var = args[0]
             if var == "no":
                 sql.set_allow_connect_to_chat(chat.id, False)
-                send_message(update.effective_message, "Connection has been disabled for this chat")
+                send_message(update.effective_message, "Koneksi telah terputus di grup ini")
             elif var == "yes":
                 sql.set_allow_connect_to_chat(chat.id, True)
-                send_message(update.effective_message, "Connection has been enabled for this chat")
+                send_message(update.effective_message, "Telah terkoneksi dengan grup ini")
             else:
-                send_message(update.effective_message, "Please enter `yes` or `no`!", parse_mode=ParseMode.MARKDOWN)
+                send_message(update.effective_message, "Ketik `yes` atau `no`!", parse_mode=ParseMode.MARKDOWN)
         else:
             get_settings = sql.allow_connect_to_chat(chat.id)
             if get_settings:
-                send_message(update.effective_message, "Connections to this group are *Allowed* for members!",
+                send_message(update.effective_message, "Connections ke grup ini *Diizinkan* untuk anggota!",
                              parse_mode=ParseMode.MARKDOWN)
             else:
-                send_message(update.effective_message, "Connection to this group are *Not Allowed* for members!",
+                send_message(update.effective_message, "Koneksi ke grup ini *Tidak diizinkan* untuk anggota!",
                              parse_mode=ParseMode.MARKDOWN)
     else:
-        send_message(update.effective_message, "This command is for group only. Not in PM!")
+        send_message(update.effective_message, "Perintah ini untuk di grup. Bukan di PM!")
 
 
 @run_async
@@ -61,9 +61,9 @@ def connection_chat(bot: Bot, update: Update):
         chat_name = chat.title
 
     if conn:
-        message = "You are currently connected with {}.\n".format(chat_name)
+        message = "Telah terkoneksi {}.\n".format(chat_name)
     else:
-        message = "You are currently not connected in any group.\n"
+        message = "Anda tidak terkoneksi oleh grup apapun.\n"
     send_message(msg, message, parse_mode="markdown")
 
 
@@ -100,14 +100,14 @@ def connect_chat(bot: Bot, update: Update, args: List[str]):
                 if connection_status:
                     conn_chat = dispatcher.bot.getChat(connected(bot, update, chat, user.id, need_admin=False))
                     chat_name = conn_chat.title
-                    send_message(msg, "Successfully connected to *{chat_name}*."
-                                      " Use /connection for see current available commands.",
+                    send_message(msg, "Sukses terhubung dengan *{chat_name}*."
+                                      " Gunakan /connection untuk melihat perintah yang tersedia.",
                                  parse_mode=ParseMode.MARKDOWN)
                     sql.add_history_conn(user.id, str(conn_chat.id), chat_name)
                 else:
-                    send_message(msg, "Connection failed!")
+                    send_message(msg, "Gagal terkoneksi!")
             else:
-                send_message(msg, "Connection to this chat is not allowed!")
+                send_message(msg, "Koneksi tidak diizinkan!")
         else:
             gethistory = sql.get_history_conn(user.id)
             if gethistory:
@@ -298,6 +298,6 @@ dispatcher.add_handler(ALLOW_CONNECTIONS_HANDLER)
 dispatcher.add_handler(HELP_CONNECT_CHAT_HANDLER)
 dispatcher.add_handler(CONNECT_BTN_HANDLER)
 
-__mod_name__ = "CONNECTION"
+__mod_name__ = "Koneksi"
 __handlers__ = [CONNECT_CHAT_HANDLER, CONNECTION_CHAT_HANDLER, DISCONNECT_CHAT_HANDLER, ALLOW_CONNECTIONS_HANDLER,
                 HELP_CONNECT_CHAT_HANDLER, CONNECT_BTN_HANDLER]
