@@ -35,8 +35,8 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
             exit(1)
 
     if not chatD.get_member(bot.id).can_promote_members:
-        update.effective_message.reply_text("I can't promote/demote people here! "
-                                            "Make sure I'm admin and can appoint new admins.")
+        update.effective_message.reply_text("Saya tidak bisa promote/demote orang disini! "
+                                            "Jadikan saya admin agar bisa promote/demote admin lain.")
         exit(1)
 
     user_id = extract_user(message, args)
@@ -46,11 +46,11 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_member = chatD.get_member(user_id)
     if user_member.status == 'administrator' or user_member.status == 'creator':
-        message.reply_text(tld(chat.id, "How am I meant to promote someone that's already an admin?"))
+        message.reply_text(tld(chat.id, "Bagaimana saya mau mempromote seseorang yang telah jadi admin?"))
         return ""
 
     if user_id == bot.id:
-        message.reply_text(tld(chat.id, "I can't promote myself! Get an admin to do it for me."))
+        message.reply_text(tld(chat.id, "Saya tidak bisa mempromote diri saya! Anda harus melakukannya untuk saya."))
         return ""
 
     # set same perms as bot - bot can't assign higher perms than itself!
@@ -66,7 +66,7 @@ def promote(bot: Bot, update: Update, args: List[str]) -> str:
                           can_pin_messages=bot_member.can_pin_messages,
                           can_promote_members=bot_member.can_promote_members)
 
-    message.reply_text(tld(chat.id, f"Successfully promoted {mention_html(user_member.user.id, user_member.user.first_name)} in {html.escape(chatD.title)}!"), parse_mode=ParseMode.HTML)
+    message.reply_text(tld(chat.id, f"Sekarang kamu adalah admin {mention_html(user_member.user.id, user_member.user.first_name)} in {html.escape(chatD.title)}!"), parse_mode=ParseMode.HTML)
     return f"<b>{html.escape(chatD.title)}:</b>" \
             "\n#PROMOTED" \
            f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}" \
@@ -90,8 +90,8 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
             exit(1)
 
     if not chatD.get_member(bot.id).can_promote_members:
-        update.effective_message.reply_text("I can't promote/demote people here! "
-                                            "Make sure I'm admin and can appoint new admins.")
+        update.effective_message.reply_text("Saya tidak bisa promote/demote orang disinj! "
+                                            "Jadikan saya admin untuk bisa mempromote admin baru.")
         exit(1)
 
     user_id = extract_user(message, args)
@@ -101,15 +101,15 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_member = chatD.get_member(user_id)
     if user_member.status == 'creator':
-        message.reply_text(tld(chat.id, "This person CREATED the chat, how would I demote them?"))
+        message.reply_text(tld(chat.id, "Orang ini yang membuat grup ini, bukankah jabatannya lebih tinggi?"))
         return ""
 
     if not user_member.status == 'administrator':
-        message.reply_text(tld(chat.id, "Can't demote what wasn't promoted!"))
+        message.reply_text(tld(chat.id, "Tidak bisa didemote"))
         return ""
 
     if user_id == bot.id:
-        message.reply_text(tld(chat.id, "I can't demote myself!"))
+        message.reply_text(tld(chat.id, "Saya tidak bisa mendemote diri sendiri!"))
         return ""
 
     try:
@@ -122,7 +122,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
                               can_restrict_members=False,
                               can_pin_messages=False,
                               can_promote_members=False)
-        message.reply_text(tld(chat.id, f"Successfully demoted in *{chatD.title}*!"), parse_mode=ParseMode.MARKDOWN)
+        message.reply_text(tld(chat.id, f"Sukses didemote dari *{chatD.title}*!"), parse_mode=ParseMode.MARKDOWN)
         return f"<b>{html.escape(chatD.title)}:</b>" \
                 "\n#DEMOTED" \
                f"\n<b>Admin:</b> {mention_html(user.id, user.first_name)}" \
@@ -130,7 +130,7 @@ def demote(bot: Bot, update: Update, args: List[str]) -> str:
 
     except BadRequest:
         message.reply_text(
-            tld(chat.id, "Could not demote. I might not be admin, or the admin status was appointed by another user, so I can't act upon them!")
+            tld(chat.id, "Tidak bisa didemote. saya mungkin bukan admin, atau bukan saya yang mempromote orang ini, jadi saya tidak bisa mendemotenya!")
             )
         return ""
 
@@ -357,18 +357,18 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /adminlist: list of admins in the chat
+ - /adminlist: untuk melihat daftar admin
 
-*Admin only:*
- - /pin: silently pins the message replied to - add 'loud' or 'notify' to give notifs to users.
- - /unpin: unpins the currently pinned message
- - /invitelink: gets invitelink
- - /promote: promotes the user replied to
- - /demote: demotes the user replied to
- - /settitle: sets a custom title for an admin that the bot promoted.
- - /settitle: Sets a custom title for an admin which is promoted by bot.
- - /setgpic: As a reply to file or photo to set group profile pic!
- - /delgpic: Same as above but to remove group profile pic.
+*Khusus Admin:*
+ - /pin: menyematkan pesan - tambahkan 'loud' atau 'notify' untuk memberi notifikasi.
+ - /unpin: melepas sematan pesan
+ - /invitelink: menampilkan link sementara grup
+ - /promote: menaikkan jabatan
+ - /demote: menurunkan jabatan
+ - /settitle: memberi title untuk admin.
+ - /settitle: memberi title untuk admin yang dipromote oleh bot.
+ - /setgpic: erply gambar untuk dijadikan Ava grup!
+ - /delgpic: menghapus Ava grup
 
 """
 
@@ -401,7 +401,7 @@ dispatcher.add_handler(CHAT_PIC_HANDLER)
 dispatcher.add_handler(DEL_CHAT_PIC_HANDLER)
 dispatcher.add_handler(ADMINLIST_HANDLER)
 
-__mod_name__ = "ADMIN"
+__mod_name__ = "Admin"
 
 __command_list__ = ["adminlist", "admins", "invitelink"]
 
