@@ -28,9 +28,9 @@ def add_chat(bot: Bot, update: Update):
         ses_id = str(ses.id)
         expires = str(ses.expires)
         sql.set_ses(chat_id, ses_id, expires)
-        msg.reply_text("AI successfully enabled for this chat!")
+        msg.reply_text("Sukses mengaktifkan mode chat!")
     else:
-        msg.reply_text("AI is already enabled for this chat!")
+        msg.reply_text("Saya sekarang tersedia untuk chat!")
         
         
 @run_async
@@ -42,7 +42,7 @@ def remove_chat(bot: Bot, update: Update):
         msg.reply_text("AI isn't enabled here in the first place!")
     else:
         sql.rem_chat(chat_id)
-        msg.reply_text("AI disabled successfully!")
+        msg.reply_text("Saya akan berhenti!")
         
         
 def check_message(bot: Bot, message):
@@ -87,14 +87,15 @@ def chatbot(bot: Bot, update: Update):
             bot.send_message(OWNER_ID, f"Chatbot error: {e} occurred in {chat_id}!")
                     
 
-__mod_name__ = "CHAT BOT"
+__mod_name__ = "Chat Bot"
 
 __help__ = """
 
-Powered by CoffeeHouse (https://coffeehouse.intellivoid.net/) from @Intellivoid
+Modul ini bantuan dari :
+CoffeeHouse (https://coffeehouse.intellivoid.net/) from @Intellivoid
 
- - /addchat : Enables Chatbot mode in the chat.
- - /rmchat  : Disables Chatbot mode in the chat.
+ - /addchat : mengaktifkan chat bot.
+ - /rmchat  : menonaktifkan chat bot.
 """
                   
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat, filters=CustomFilters.dev_filter)
