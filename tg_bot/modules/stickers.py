@@ -79,7 +79,7 @@ def steal(bot: Bot, update: Update, args: List[str]):
         elif msg.reply_to_message.sticker and msg.reply_to_message.sticker.emoji:
             sticker_emoji = msg.reply_to_message.sticker.emoji
         else:
-            sticker_emoji = "🤔"
+            sticker_emoji = "😎"
         try:
             im = Image.open(stolensticker)
             maxsize = (512, 512)
@@ -107,7 +107,7 @@ def steal(bot: Bot, update: Update, args: List[str]):
             msg.reply_text(f"Sticker successfully added to [pack](t.me/addstickers/{packname})" +
                             f"\nEmoji is: {sticker_emoji}", parse_mode=ParseMode.MARKDOWN)
         except OSError as e:
-            msg.reply_text("I can only steal images, dude.")
+            msg.reply_text("Hanya bisa mengambil stiker, teman.")
             print(e)
             return
         except TelegramError as e:
@@ -117,8 +117,8 @@ def steal(bot: Bot, update: Update, args: List[str]):
                 im.save(stolensticker, "PNG")
                 bot.add_sticker_to_set(user_id=user.id, name=packname,
                                         png_sticker=open('stolensticker.png', 'rb'), emojis=sticker_emoji)
-                msg.reply_text(f"Sticker successfully added to [pack](t.me/addstickers/{packname})" +
-                                f"\nEmoji is: {sticker_emoji}", parse_mode=ParseMode.MARKDOWN)
+                msg.reply_text(f"Stiker telah ditambahkan [kesini](t.me/addstickers/{packname})" +
+                                f"\nEmotnya : {sticker_emoji}", parse_mode=ParseMode.MARKDOWN)
             elif e.message == "Invalid sticker emojis":
                 msg.reply_text("Invalid emoji(s).")
             elif e.message == "Stickers_too_much":
@@ -162,7 +162,7 @@ def steal(bot: Bot, update: Update, args: List[str]):
             msg.reply_text(f"Sticker successfully added to [pack](t.me/addstickers/{packname})" +
                             f"\nEmoji is: {sticker_emoji}", parse_mode=ParseMode.MARKDOWN)
         except OSError as e:
-            msg.reply_text("I can only steal images, dude.")
+            msg.reply_text("Saya hanya bisa mengambil gambar, kawan.")
             print(e)
             return
         except TelegramError as e:
@@ -172,8 +172,8 @@ def steal(bot: Bot, update: Update, args: List[str]):
                 im.save(stolensticker, "PNG")
                 bot.add_sticker_to_set(user_id=user.id, name=packname,
                                         png_sticker=open('stolensticker.png', 'rb'), emojis=sticker_emoji)
-                msg.reply_text("Sticker successfully added to [pack](t.me/addstickers/%s)" % packname + "\n" +
-                            "Emoji is:" + " " + sticker_emoji, parse_mode=ParseMode.MARKDOWN)
+                msg.reply_text("Stiker sukses ditambahkan [kesini](t.me/addstickers/%s)" % packname + "\n" +
+                            "Emotnya :" + " " + sticker_emoji, parse_mode=ParseMode.MARKDOWN)
             elif e.message == "Invalid sticker emojis":
                 msg.reply_text("Invalid emoji(s).")
             elif e.message == "Stickers_too_much":
@@ -183,7 +183,7 @@ def steal(bot: Bot, update: Update, args: List[str]):
                             "Emoji is:" + " " + sticker_emoji, parse_mode=ParseMode.MARKDOWN)
             print(e)
     else:
-        packs = "Please reply to a sticker or image to steal it to your pack!\nOh by the way, here are your packs:\n"
+        packs = "Reply saja stiker untuk menambahkan ke pack anda!\n, Btw pack kamu ini:\n"
         if packnum > 0:
             firstpackname = "a" + str(user.id) + "_by_"+bot.username
             for i in range(0, packnum + 1):
@@ -229,12 +229,12 @@ def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
 
 
 __help__ = """
-- /stickerid: reply to a sticker to get its ID.
-- /getsticker: reply to a sticker to get the raw PNG image.
-- /steal: reply to a sticker or image to add it to your pack.
+- /stickerid: reply stiker untuk menampilkan ID.
+- /getsticker: reply stiker untuk memuat ke file PNG.
+- /steal: reply stiker untuk menambahkan ke pack anda.
 """
 
-__mod_name__ = "STICKERS"
+__mod_name__ = "Stiker"
 STICKERID_HANDLER = DisableAbleCommandHandler("stickerid", stickerid)
 GETSTICKER_HANDLER = DisableAbleCommandHandler("getsticker", getsticker)
 STEAL_HANDLER = DisableAbleCommandHandler("steal", steal, pass_args=True, admin_ok=False)
