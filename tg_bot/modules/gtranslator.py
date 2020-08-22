@@ -98,34 +98,34 @@ def totranslate(bot: Bot, update: Update):
                 detection = trl.detect(text)
                 tekstr = trl.translate(text, dest=source_lang)
                 return message.reply_text(
-                    "Translated from `{}` to `{}`:\n`{}`".format(detection.lang, source_lang, tekstr.text),
+                    "Diterjemahkan oleh @canzu \nDari `{}` ke `{}`:\n`{}`".format(detection.lang, source_lang, tekstr.text),
                     parse_mode=ParseMode.MARKDOWN)
             else:
                 tekstr = trl.translate(text, dest=dest_lang, src=source_lang)
-                message.reply_text("Translated from `{}` to `{}`:\n`{}`".format(source_lang, dest_lang, tekstr.text),
+                message.reply_text("Diterjemahkan oleh saya \nDari `{}` ke `{}`:\n`{}`".format(source_lang, dest_lang, tekstr.text),
                                    parse_mode=ParseMode.MARKDOWN)
 
     except IndexError:
         update.effective_message.reply_text(
-            "Reply to messages or write messages from other languages ​​for translating into the intended language\n\n"
-            "Example: `/tr en ml` to translate from English to Malayalam\n"
-            "Or use: `/tr ml` for automatic detection and translating it into Malayalam.\n"
-            "See [List of Language Codes](t.me/OnePunchSupport/12823) for a list of language codes.",
+            "Reply pesan atau tulis kalimat bahasa lain ​​untuk diterjemahkan ke bahasa yang diinginkan \n\n"
+            "Contoh: `/tr en id` untuk menerjemahkan bahasa Inggris ke bahasa Indonesia\n"
+            "Atau : `/tr id` untuk otomatis mendeteksi Bahasa yang akan diterjemahkan ke bahasa Indonesia.\n"
+            "Lihat [Kode Bahasa](t.me/canzu/20) for untuk melihat daftar kode bahasa.",
             parse_mode="markdown", disable_web_page_preview=True)
     except ValueError:
-        update.effective_message.reply_text("The intended language is not found!")
+        update.effective_message.reply_text("Bahasa yang diinginkan tidak terdeteksi!")
     else:
         return
 
 
 __help__ = """
-- /tr (language code) as reply to a long message.
+- /tr (kode bahasa) balas kalimat yang ingin diterjemahkan.
 """
 
 TRANSLATE_HANDLER = DisableAbleCommandHandler("tr", totranslate)
 
 dispatcher.add_handler(TRANSLATE_HANDLER)
 
-__mod_name__ = "TRANSLATOR"
+__mod_name__ = "Kamus"
 __command_list__ = ["tr"]
 __handlers__ = [TRANSLATE_HANDLER]
