@@ -9,7 +9,7 @@ from tg_bot.modules.disable import DisableAbleCommandHandler
 @run_async
 def weather(bot, update, args):
     if len(args) == 0:
-        update.effective_message.reply_text("Write a location to check the weather.")
+        update.effective_message.reply_text("Tulis lokasi yang ingin dicek cuacanya.")
         return
 
     location = " ".join(args)
@@ -54,18 +54,18 @@ def weather(bot, update, args):
         status += theweather._detailed_status
                         
 
-        update.message.reply_text("Today in {} is being {}, around {}°C.\n".format(thelocation,
+        update.message.reply_text("Hari ini {} sedang {}, sekitar {}°C.\n".format(thelocation,
                 status, temperature))
 
     except pyowm.exceptions.not_found_error.NotFoundError:
-        update.effective_message.reply_text("Sorry, location not found.")
+        update.effective_message.reply_text("Maaf, lokasi tidak terdeteksi.")
 
 
 __help__ = """
- - /weather <city>: get weather info in a particular place
+ - /weather <Kota>: menampilkan cuaca
 """
 
-__mod_name__ = "WEATHER"
+__mod_name__ = "Cuaca"
 
 WEATHER_HANDLER = DisableAbleCommandHandler("weather", weather, pass_args=True)
 
