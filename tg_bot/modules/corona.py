@@ -5,15 +5,15 @@ from tg_bot import dispatcher
 from tg_bot.modules.disable import DisableAbleCommandHandler
 
 SFW_STRINGS = (
-    "HOW CAN I PROTECT MYSELF FROM CORONAVIRUS?",
-    "🧼WASH YOUR HANDS FREQUENTLY",
-    "🚴‍♂️EXCERCISE AND PROPER SLEEP🛌 WILL BOLSTER THE IMMUNE SYSTEM",
-    "🛀MAINTAIN GOOD HYGIENE HABHITS AT ALL TIMES",
-    "👬AVOID CONTACT WITH OTHERS",
-    "😷WEAR A FACE MASK WHEN DEALING WITH INFECTED PATIENT'S",
-    "🧻USE TISSUES WHEN COUGHING OR BLOWING NOSE",
-    "🍎WASH AND PREPARE FOODS CAREFULLY",
-    "STAY HOME STAY SAFE",
+    "Apakah benar corona hanya konspirasi?",
+    "🧼Rajin cuci tangan",
+    "🚴‍♂️Olahraga dan tidur yang cukup🛌 Untuk meningkatkan imunitas tubuh",
+    "🛀Rajin mandi dengan air bersih",
+    "👬Jaga jarak",
+    "😷Sedia dan pakai masker jika bepergian",
+    "Hindari kebiasaan memegang mulut dan hidung tanpa cuci tangan terlebih dahulu",
+    "Makan makanan yang sehat dan higienis",
+    "#Dirumahaja kalo gaada yang penting dilakukan diluar",
   )
 
 @run_async
@@ -29,7 +29,7 @@ __help__ = """
 - /corona  😷.
 """
 
-__mod_name__ = "BREAK THE CHAIN"
+__mod_name__ = "StaySafe"
 
 CRNA_HANDLER = DisableAbleCommandHandler("corona", corona)
 
