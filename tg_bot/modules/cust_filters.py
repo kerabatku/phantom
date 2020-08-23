@@ -20,7 +20,7 @@ from tg_bot.modules.sql import cust_filters_sql as sql
 from tg_bot.modules.connection import connected
 
 HANDLER_GROUP = 10
-BASIC_FILTER_STRING = "*Filters in this chat:*\n"
+BASIC_FILTER_STRING = "*Filters yang tersedia di grup:*\n"
 
 
 @run_async
@@ -32,7 +32,7 @@ def list_handlers(bot: Bot, update: Update):
     if not conn == False:
         chat_id = conn
         chat_name = dispatcher.bot.getChat(conn).title
-        filter_list = "*Filters in {}:*\n"
+        filter_list = "*Filters di grup {}:*\n"
     else:
         chat_id = update.effective_chat.id
         if chat.type == "private":
@@ -40,13 +40,13 @@ def list_handlers(bot: Bot, update: Update):
             filter_list = "*local filters:*\n"
         else:
             chat_name = chat.title
-            filter_list = "*Filters in {}*:\n".format(chat_name)
+            filter_list = "*Filters yang tersedia di grup {}*:\n".format(chat_name)
 
 
     all_handlers = sql.get_chat_triggers(chat_id)
 
     if not all_handlers:
-        update.effective_message.reply_text("No filters in *{}*!".format(chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
+        update.effective_message.reply_text("Belum ada filter di grup *{}*!".format(chat_name), parse_mode=telegram.ParseMode.MARKDOWN)
         return
 
     for keyword in all_handlers:
@@ -265,17 +265,17 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /filters: list all active filters in this chat.
+ - /filters: menampilkan daftar filter.
 
 *Admin only:*
- - /filter <keyword> <reply message>: add a filter to this chat. The bot will now reply that message whenever 'keyword'\
-is mentioned. If you reply to a sticker with a keyword, the bot will reply with that sticker. NOTE: all filter \
-keywords are in lowercase. If you want your keyword to be a sentence, use quotes. eg: /filter "hey there" How you \
-doin?
- - /stop <filter keyword>: stop that filter.
+ - /filter <kata> <balasan>: menambahkan filter. Sekarang bot akan membalas setiap 'kata'\
+sebagai mention. Jika anda mereply stiker, maka stiker itu akan dijadikan balasan `kata`. Catatan : semua filter \
+kata adalah huruf kecil . Jika anda ingin memakai lebih dari dua kata, gunakan format. eg: /filter "test dong" Bisa kan\
+Bolehkah?
+ - /stop <kata>: menghapus filter.
 """
 
-__mod_name__ = "FILTERS"
+__mod_name__ = "Filters"
 
 FILTER_HANDLER = CommandHandler("filter", filters)
 STOP_HANDLER = CommandHandler("stop", stop_filter)
